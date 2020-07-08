@@ -10,4 +10,5 @@ out/
 *.iws
 .project
 .settings
-.classpath
+.classpath.mvn/
+venv/
