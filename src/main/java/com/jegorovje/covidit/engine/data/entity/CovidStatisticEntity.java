@@ -54,9 +54,9 @@ public interface CovidStatisticEntity  {
 
   public void setTotalCasesPerMln(Double totalCasesPerMln);
 
-  public Double getDeaths1PerMln();
+  public Double getDeathsPerMln();
 
-  public void setDeaths1PerMln(Double deaths1PerMln);
+  public void setDeathsPerMln(Double deathsPerMln);
 
   public Double getTestsPerMln();
 

@@ -34,25 +34,26 @@ def main():
   for data in content:
     if (data.attrs.get('style') != "display: none"):
       splited = data.text.split("\n")
-      if (splited[1] != "#"):
-        if (splited[1] == ""):
-          SharpList.append("0")
-        else:
-          SharpList.append(splited[1])
-        CountryList.append(splited[2])
-        TotalCasesList.append(splited[3])
-        NewCasesList.append(splited[4])
-        TotalDeathsList.append(splited[5])
-        NewDeathsList.append(splited[6])
-        TotalRecoveredList.append(splited[7])
-        NewRecoveredList.append(splited[8])
-        ActiveCasesList.append(splited[9])
-        SeriousCriticalList.append(splited[10])
-        TotCases1MList.append(splited[11])
-        Deaths1MList.append(splited[12])
-        TotalTestsList.append(splited[13])
-        Tests1MList.append(splited[14])
-        PopulationList.append(splited[15])
+      if (splited[2] != "Total:"):
+        if (splited[1] != "#"):
+          if (splited[1] == ""):
+            SharpList.append("0")
+          else:
+            SharpList.append(splited[1])
+          CountryList.append(splited[2])
+          TotalCasesList.append(splited[3])
+          NewCasesList.append(splited[4])
+          TotalDeathsList.append(splited[5])
+          NewDeathsList.append(splited[6])
+          TotalRecoveredList.append(splited[7])
+          NewRecoveredList.append(splited[8])
+          ActiveCasesList.append(splited[9])
+          SeriousCriticalList.append(splited[10])
+          TotCases1MList.append(splited[11])
+          Deaths1MList.append(splited[12])
+          TotalTestsList.append(splited[13])
+          Tests1MList.append(splited[14])
+          PopulationList.append(splited[15])
 
   result = []
   for i in range(SharpList.__len__()):

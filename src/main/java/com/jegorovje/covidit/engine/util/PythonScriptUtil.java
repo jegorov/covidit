@@ -27,12 +27,15 @@ public class PythonScriptUtil {
     processBuilder.redirectErrorStream(true);
 
     Process process = processBuilder.start();
-    BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
-    String response = in.readLine();
-    JsonObject json = JsonParser.parseString(response).getAsJsonObject();
+    String jsonValues;
+    try (BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+      String response = in.readLine();
+      JsonObject json = JsonParser.parseString(response).getAsJsonObject();
 
-    Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    return gson.toJson(json);
+      Gson gson = new GsonBuilder().setPrettyPrinting().create();
+      jsonValues = gson.toJson(json);
+    }
+    return jsonValues;
   }
 
 }

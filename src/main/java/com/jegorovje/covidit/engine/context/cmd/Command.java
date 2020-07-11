@@ -6,7 +6,4 @@ import org.hibernate.Session;
 public interface Command<T> {
 
   T execute(CommandContext commandContext);
-
-  T execute(CommandContext commandContext, Session session);
-
 }
