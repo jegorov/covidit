@@ -59,7 +59,12 @@ public abstract class CovidStatisticEntityManager extends AbstractEntityManager 
       case "Double": {
         return Double.parseDouble(value);
       }
+      case "String": {
+        return value;
+      }
+      default: {
+        throw new IllegalArgumentException("IllegalType type " + clazz.getSimpleName());
+      }
     }
-    return object;
   }
 }

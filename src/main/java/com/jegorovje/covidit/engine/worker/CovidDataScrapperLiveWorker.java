@@ -16,9 +16,6 @@ public class CovidDataScrapperLiveWorker {
   private static final Logger LOG = LoggerFactory.getLogger(CovidDataScrapperLiveWorker.class);
 
 
-  @Inject
-  CommandContext commandContext;
-
   public CovidDataScrapperLiveWorker() {
     Thread thread = Thread.currentThread();
     thread.setName("asyncDataScrapperLiveThread");
@@ -27,7 +24,7 @@ public class CovidDataScrapperLiveWorker {
   @Scheduled(fixedDelay = "10s")
   void executeScript() {
     try {
-      commandContext.execute(new InsertAllCovidStatisticToDatabaseCmd());
+      CommandContext.getCommandContext().execute(new InsertAllCovidStatisticToDatabaseCmd());
     } catch (Exception e) {
       LOG.error("IOException during AsyncDataScrapperLiveThread", e);
     }

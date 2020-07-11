@@ -13,7 +13,7 @@ import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 
 @AllArgsConstructor
-public class InsertAllCovidStatisticToDatabaseCmd implements Command {
+public class InsertAllCovidStatisticToDatabaseCmd implements Command<Void> {
 
   @SneakyThrows
   @Override

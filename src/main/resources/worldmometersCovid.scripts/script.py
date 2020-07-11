@@ -87,7 +87,6 @@ def main():
                "totalTests": totalTests,
                "tests1M": tests1M,
                "population": population}
-  # json_dump = json.dump(jsonStr)
     result.append(jsonStr)
   return result
 result = "{\"lines\": " + str(main()) + "}"

@@ -6,7 +6,8 @@ import com.jegorovje.covidit.engine.factory.SqlSessionFactory;
 import io.micronaut.runtime.event.annotation.EventListener;
 import io.micronaut.runtime.server.event.ServerStartupEvent;
 import io.micronaut.transaction.annotation.TransactionalAdvice;
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.Getter;
@@ -16,9 +17,9 @@ import org.slf4j.LoggerFactory;
 
 @Singleton
 @TransactionalAdvice
-public class CommandContext<T> {
+public class CommandContext {
 
-  private static Stack<CommandContext> stack = new Stack<>();
+  private static Deque<CommandContext> stack = new ArrayDeque<>();
 
   private static final Logger logger = LoggerFactory.getLogger(CommandContext.class);
 
@@ -38,7 +39,7 @@ public class CommandContext<T> {
     stack.push(this);
   }
 
-  public void execute(Command<T> command) {
+  public <T> void execute(Command<T> command) {
     try {
       Session session = sessionFactory.getSession();
       command.execute(this);

@@ -2,7 +2,6 @@ package com.jegorovje.covidit.engine.factory;
 
 import io.micronaut.context.annotation.Bean;
 import io.micronaut.context.annotation.Context;
-import io.micronaut.context.annotation.Factory;
 import io.micronaut.context.annotation.Requires;
 import java.sql.SQLException;
 import javax.inject.Singleton;
