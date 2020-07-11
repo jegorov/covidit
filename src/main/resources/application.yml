@@ -11,12 +11,11 @@ jpa:
     entity-scan:
       packages: 'com.jegorovje.covidit.engine.data.entity'
     properties:
-          hibernate:
-            hbm2ddl:
-              auto: update
-            show_sql: true
-#            работает только с включенной настройкой =(
-#            allow_update_outside_transaction: true
+      hibernate:
+        hbm2ddl:
+          auto: update
+        show_sql: false
+        allow_update_outside_transaction: false
 server:
   cors:
     enabled: true
@@ -34,3 +33,9 @@ server:
 h2:
   console:
     enabled: false
+micronaut:
+  executors:
+    scheduled:
+      type: scheduled
+      core-pool-size: 30
+#      thread-factory-class: org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl.ValidationThreadFactory
