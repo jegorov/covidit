@@ -18,47 +18,47 @@ public interface CovidStatisticEntity  {
 
   public void setNewRecovered(String newRecovered);
 
-  public Integer getSharp();
+  public String getSharp();
 
-  public void setSharp(Integer sharp);
+  public void setSharp(String sharp);
 
-  public Integer getTotalCases();
+  public String getTotalCases();
 
-  public void setTotalCases(Integer totalCases);
+  public void setTotalCases(String totalCases);
 
-  public Integer getTotalDeath();
+  public String getTotalDeath();
 
-  public void setTotalDeath(Integer totalDeath);
+  public void setTotalDeath(String totalDeath);
 
-  public Integer getTotalRecovered();
+  public String getTotalRecovered();
 
-  public void setTotalRecovered(Integer totalRecovered);
+  public void setTotalRecovered(String totalRecovered);
 
-  public Integer getActiveCases();
+  public String getActiveCases();
 
-  public void setActiveCases(Integer activeCases);
+  public void setActiveCases(String activeCases);
 
-  public Integer getSeriousCritical();
+  public String getSeriousCritical();
 
-  public void setSeriousCritical(Integer seriousCritical);
+  public void setSeriousCritical(String seriousCritical);
 
-  public Integer getTotalTests();
+  public String getTotalTests();
 
-  public void setTotalTests(Integer totalTests);
+  public void setTotalTests(String totalTests);
 
-  public Integer getPopulation();
+  public String getPopulation();
 
-  public void setPopulation(Integer population);
+  public void setPopulation(String population);
 
-  public Double getTotalCasesPerMln();
+  public String getTotalCasesPerMln();
 
-  public void setTotalCasesPerMln(Double totalCasesPerMln);
+  public void setTotalCasesPerMln(String totalCasesPerMln);
 
-  public Double getDeathsPerMln();
+  public String getDeathsPerMln();
 
-  public void setDeathsPerMln(Double deathsPerMln);
+  public void setDeathsPerMln(String deathsPerMln);
 
-  public Double getTestsPerMln();
+  public String getTestsPerMln();
 
-  public void setTestsPerMln(Double testsPerMln);
+  public void setTestsPerMln(String testsPerMln);
 }

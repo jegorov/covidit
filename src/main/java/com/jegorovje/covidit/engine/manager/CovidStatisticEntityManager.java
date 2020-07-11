@@ -4,7 +4,6 @@ import com.jegorovje.covidit.engine.context.CommandContext;
 import com.jegorovje.covidit.engine.data.entity.AbstractEntity;
 import com.jegorovje.covidit.engine.data.entity.impl.CovidStatisticEntityImpl;
 import io.micronaut.transaction.annotation.ReadOnly;
-import io.netty.util.internal.StringUtil;
 import java.util.Map;
 import java.util.UUID;
 import javax.inject.Singleton;
@@ -34,49 +33,37 @@ public abstract class CovidStatisticEntityManager extends AbstractEntityManager 
 
   public CovidStatisticEntityImpl createCovidStatisticFromMap(Map<String, String> map) {
     CovidStatisticEntityImpl entity = (CovidStatisticEntityImpl) create();
-    entity.setActiveCases((Integer) parseJsonObject(Integer.class, map.get("activeCases")));
-    entity.setTotalCases((Integer) parseJsonObject(Integer.class, map.get("totalCases")));
-    entity.setTotalDeath((Integer) parseJsonObject(Integer.class, map.get("totalDeath")));
+    entity.setActiveCases(parseToString(map.get("activeCases")));
+    entity.setTotalCases(parseToString(map.get("totalCases")));
+    entity.setTotalDeath(parseToString(map.get("totalDeath")));
     entity
-        .setTotalRecovered((Integer) parseJsonObject(Integer.class, map.get("totalRecovered")));
-    entity.setSharp((Integer) parseJsonObject(Integer.class, map.get("sharp")));
-    entity.setSeriousCritical(
-        (Integer) parseJsonObject(Integer.class, map.get("seriousCritical")));
-    entity.setTotalTests((Integer) parseJsonObject(Integer.class, map.get("totalTests")));
-    entity.setPopulation((Integer) parseJsonObject(Integer.class, map.get("population")));
+        .setTotalRecovered(parseToString(map.get("totalRecovered")));
+    entity.setSharp(parseToString(map.get("sharp")));
+    entity.setSeriousCritical(parseToString(map.get("seriousCritical")));
+    entity.setTotalTests(parseToString(map.get("totalTests")));
+    entity.setPopulation(parseToString(map.get("population")));
 
-    entity.setTestsPerMln((Double) parseJsonObject(Double.class, map.get("tests1M")));
-    entity.setDeathsPerMln((Double) parseJsonObject(Double.class, map.get("deaths1M")));
-    entity.setTotalCasesPerMln((Double) parseJsonObject(Double.class, map.get("totalCases1M")));
+    entity.setTestsPerMln(parseToString(map.get("tests1M")));
+    entity.setDeathsPerMln(parseToString(map.get("deaths1M")));
+    entity.setTotalCasesPerMln(parseToString(map.get("totalCases1M")));
 
-    entity.setCountry(map.get("country"));
-    entity.setNewCases(map.get("newCases"));
-    entity.setNewDeath(map.get("newDeath"));
-    entity.setNewRecovered(map.get("newRecovered"));
+    entity.setCountry(parseToString(map.get("country")));
+    entity.setNewCases(parseToString(map.get("newCases")));
+    entity.setNewDeath(parseToString(map.get("newDeath")));
+    entity.setNewRecovered(parseToString(map.get("newRecovered")));
     entity.setId(UUID.nameUUIDFromBytes(entity.getCountry().getBytes()));
     return entity;
   }
 
   @SneakyThrows
-  private Object parseJsonObject(Class clazz, String value) {
-    if (StringUtil.isNullOrEmpty(value.strip()) || value.equals("N/A")) {
+  private String parseToString(String value) {
+    if (value == null || value.strip().isEmpty()) {
       return null;
     }
-    Object object = null;
-    value = value.strip().replaceAll(",", "");
-    switch (clazz.getSimpleName()) {
-      case "Integer": {
-        return Integer.parseInt(value);
-      }
-      case "Double": {
-        return Double.parseDouble(value);
-      }
-      case "String": {
-        return value;
-      }
-      default: {
-        throw new IllegalArgumentException("IllegalType type " + clazz.getSimpleName());
-      }
+    if (value.strip().equals("N/A")) {
+      return value.strip();
     }
+    value = value.strip().replace(",", "");
+    return value;
   }
 }

@@ -24,17 +24,17 @@ public class CovidStatisticEntityImpl extends AbstractEntity implements CovidSta
   String newCases;
   String newDeath;
   String newRecovered;
-  Integer sharp;
-  Integer totalCases;
-  Integer totalDeath;
-  Integer totalRecovered;
-  Integer activeCases;
-  Integer seriousCritical;
-  Integer totalTests;
-  Integer population;
-  Double totalCasesPerMln;
-  Double deathsPerMln;
-  Double testsPerMln;
+  String sharp;
+  String totalCases;
+  String totalDeath;
+  String totalRecovered;
+  String activeCases;
+  String seriousCritical;
+  String totalTests;
+  String population;
+  String totalCasesPerMln;
+  String deathsPerMln;
+  String testsPerMln;
 
 
 }
