@@ -8,14 +8,13 @@ datasources:
     dialect: H2
 jpa:
   default:
-    entity-scan:
-      packages: 'com.jegorovje.covidit.engine.data.entity'
     properties:
       hibernate:
         hbm2ddl:
           auto: update
         show_sql: false
         allow_update_outside_transaction: false
+    packages-to-scan: 'com.jegorovje.covidit.engine.data.entity.impl'
 server:
   cors:
     enabled: true
