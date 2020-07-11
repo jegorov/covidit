@@ -31,6 +31,8 @@
     <mapstruct.version>1.3.0.Final</mapstruct.version>
     <h2.version>1.4.200</h2.version>
     <micronaut.data.processor.annotation>1.1.1</micronaut.data.processor.annotation>
+    <micronaut.kafka.version>1.4.0</micronaut.kafka.version>
+    <google.guava.version>29.0-jre</google.guava.version>
   </properties>
 
   <repositories>
@@ -122,6 +124,13 @@
       <artifactId>micronaut-test-junit5</artifactId>
       <scope>test</scope>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/io.micronaut.configuration/micronaut-kafka -->
+    <dependency>
+      <groupId>io.micronaut.configuration</groupId>
+      <artifactId>micronaut-kafka</artifactId>
+      <version>${micronaut.kafka.version}</version>
+    </dependency>
+
 
 
     <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
@@ -156,7 +165,7 @@
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
-      <version>29.0-jre</version>
+      <version>${google.guava.version}</version>
     </dependency>
 
   </dependencies>
