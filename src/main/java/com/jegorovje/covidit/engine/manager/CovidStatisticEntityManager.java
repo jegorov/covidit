@@ -1,11 +1,15 @@
 package com.jegorovje.covidit.engine.manager;
 
+import com.jegorovje.covidit.engine.context.CommandContext;
 import com.jegorovje.covidit.engine.data.entity.AbstractEntity;
 import com.jegorovje.covidit.engine.data.entity.impl.CovidStatisticEntityImpl;
+import io.micronaut.transaction.annotation.ReadOnly;
 import io.netty.util.internal.StringUtil;
 import java.util.Map;
 import java.util.UUID;
 import javax.inject.Singleton;
+import javax.persistence.TypedQuery;
+import javax.validation.constraints.NotNull;
 import lombok.SneakyThrows;
 
 
@@ -17,8 +21,16 @@ public abstract class CovidStatisticEntityManager extends AbstractEntityManager 
     return new CovidStatisticEntityImpl();
   }
 
-//  @Query("SELECT * FROM user WHERE enabled = false")
-//  abstract List<CovidStatisticEntityImpl> findDisabled();
+  @ReadOnly
+  public CovidStatisticEntityImpl findCovidStatisticByCountry(@NotNull String country) {
+    String qlString = "from CovidStatisticEntityImpl as a where LOWER(country) LIKE LOWER(:country)";
+    TypedQuery<CovidStatisticEntityImpl> query = CommandContext.getCommandContext()
+        .getEngineConfiguration()
+        .getEntityManager().createQuery(qlString, CovidStatisticEntityImpl.class);
+    query.setParameter("country", country);
+
+    return query.getSingleResult();
+  }
 
   public CovidStatisticEntityImpl createCovidStatisticFromMap(Map<String, String> map) {
     CovidStatisticEntityImpl entity = (CovidStatisticEntityImpl) create();

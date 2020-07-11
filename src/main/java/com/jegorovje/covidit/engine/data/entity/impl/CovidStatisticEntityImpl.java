@@ -21,7 +21,20 @@ public class CovidStatisticEntityImpl extends AbstractEntity implements CovidSta
   UUID id;
   @Column(unique = true)
   String country;
-  String newCases, newDeath, newRecovered;
-  Integer sharp, totalCases, totalDeath, totalRecovered, activeCases, seriousCritical, totalTests, population;
-  Double totalCasesPerMln, deathsPerMln, testsPerMln;
+  String newCases;
+  String newDeath;
+  String newRecovered;
+  Integer sharp;
+  Integer totalCases;
+  Integer totalDeath;
+  Integer totalRecovered;
+  Integer activeCases;
+  Integer seriousCritical;
+  Integer totalTests;
+  Integer population;
+  Double totalCasesPerMln;
+  Double deathsPerMln;
+  Double testsPerMln;
+
+
 }

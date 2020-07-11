@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 @Controller("/json")
 public class StocksNasdaqJson {
 
-  private static final Logger LOG = LoggerFactory.getLogger(StocksNasdaqJson.class);
+  private static final Logger log = LoggerFactory.getLogger(StocksNasdaqJson.class);
   private final RxHttpClient httpClient;
 
   public StocksNasdaqJson(RxHttpClient httpClient) {
@@ -49,44 +49,6 @@ public class StocksNasdaqJson {
       HttpRequest<?> request = HttpRequest
           .GET("https://api.tradier.com/beta/markets/fundamentals/company?symbols=" + name)
           .bearerAuth("Xs64OgwelWrp9SG4thnaIaGxAQJq").accept(MediaType.APPLICATION_JSON_TYPE);
-
-      String response = httpClient.toBlocking().retrieve(request);
-      JsonObject json = JsonParser.parseString(response).getAsJsonObject();
-
-      Gson gson = new GsonBuilder().setPrettyPrinting().create();
-      return gson.toJson(json);
-    } catch (Exception e) {
-      return "error";
-    }
-  }
-
-  @Get(value = "/covid/{code}", produces = MediaType.APPLICATION_JSON)
-  public String covid(String code) {
-    try {
-      HttpRequest<?> request;
-      if (code.equals("help")) {
-        request = HttpRequest
-            .GET("https://api.covid19api.com/").accept(MediaType.APPLICATION_JSON_TYPE);
-      } else {
-        request = HttpRequest
-            .GET("https://api.covid19api.com/" + code).accept(MediaType.APPLICATION_JSON_TYPE);
-      }
-
-      String response = httpClient.toBlocking().retrieve(request);
-      JsonObject json = JsonParser.parseString(response).getAsJsonObject();
-
-      Gson gson = new GsonBuilder().setPrettyPrinting().create();
-      return gson.toJson(json);
-    } catch (Exception e) {
-      return "error";
-    }
-  }
-
-  @Get(value = "/covid/country/{code}", produces = MediaType.APPLICATION_JSON)
-  public String country(String code) {
-    try {
-      HttpRequest<?> request = HttpRequest
-          .GET("https://api.covid19api.com/country/" + code).accept(MediaType.APPLICATION_JSON_TYPE);
 
       String response = httpClient.toBlocking().retrieve(request);
       JsonObject json = JsonParser.parseString(response).getAsJsonObject();
