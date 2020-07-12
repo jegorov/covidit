@@ -36,5 +36,7 @@ micronaut:
   executors:
     scheduled:
       type: scheduled
-      core-pool-size: 30
-#      thread-factory-class: org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl.ValidationThreadFactory
+      core-pool-size: 3
+kafka:
+  bootstrap:
+    servers: localhost:9092
