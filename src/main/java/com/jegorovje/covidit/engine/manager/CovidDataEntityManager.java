@@ -2,7 +2,7 @@ package com.jegorovje.covidit.engine.manager;
 
 import com.jegorovje.covidit.engine.context.CommandContext;
 import com.jegorovje.covidit.engine.data.entity.AbstractEntity;
-import com.jegorovje.covidit.engine.data.entity.impl.CovidStatisticEntityImpl;
+import com.jegorovje.covidit.engine.data.entity.impl.CovidDataEntityImpl;
 import io.micronaut.transaction.annotation.ReadOnly;
 import java.util.Map;
 import java.util.UUID;
@@ -13,26 +13,26 @@ import lombok.SneakyThrows;
 
 
 @Singleton
-public abstract class CovidStatisticEntityManager extends AbstractEntityManager {
+public abstract class CovidDataEntityManager extends AbstractEntityManager {
 
 
   public AbstractEntity create() {
-    return new CovidStatisticEntityImpl();
+    return new CovidDataEntityImpl();
   }
 
   @ReadOnly
-  public CovidStatisticEntityImpl findCovidStatisticByCountry(@NotNull String country) {
-    String qlString = "from CovidStatisticEntityImpl as a where LOWER(country) LIKE LOWER(:country)";
-    TypedQuery<CovidStatisticEntityImpl> query = CommandContext.getCommandContext()
+  public CovidDataEntityImpl findCovidStatisticByCountry(@NotNull String country) {
+    String qlString = "from CovidDataEntityImpl as a where LOWER(country) LIKE LOWER(:country)";
+    TypedQuery<CovidDataEntityImpl> query = CommandContext.getCommandContext()
         .getEngineConfiguration()
-        .getEntityManager().createQuery(qlString, CovidStatisticEntityImpl.class);
+        .getEntityManager().createQuery(qlString, CovidDataEntityImpl.class);
     query.setParameter("country", country);
 
     return query.getSingleResult();
   }
 
-  public CovidStatisticEntityImpl createCovidStatisticFromMap(Map<String, String> map) {
-    CovidStatisticEntityImpl entity = (CovidStatisticEntityImpl) create();
+  public CovidDataEntityImpl createCovidStatisticFromMap(Map<String, String> map) {
+    CovidDataEntityImpl entity = (CovidDataEntityImpl) create();
     entity.setActiveCases(parseToString(map.get("activeCases")));
     entity.setTotalCases(parseToString(map.get("totalCases")));
     entity.setTotalDeath(parseToString(map.get("totalDeath")));

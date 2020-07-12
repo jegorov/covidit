@@ -24,11 +24,14 @@ public class InsertAllCovidStatisticToDatabaseCmd implements Command<Void> {
         .readValue(getGsonFromWorldmapCovid(),
             new TypeReference<>() {
             });
-    for (LinkedHashMap map : (ArrayList<LinkedHashMap>) countriesCovidMap.get("lines")) {
+    for (LinkedHashMap<String, String> map : (ArrayList<LinkedHashMap<String, String>>) countriesCovidMap.get("lines")) {
       Entity entity = CommandContext.getCommandContext().getEngineConfiguration()
-          .getCovidStatisticEntityManager()
+          .getCovidDataEntityManager()
           .createCovidStatisticFromMap(map);
-      commandContext.getEngineConfiguration().getCovidStatisticEntityManager().merge(entity);
+      commandContext.getEngineConfiguration().getCovidDataEntityManager().merge(entity);
+      //todo кафку тут пока нет смысла использовать
+//      commandContext.getEngineConfiguration().getLiveCovidDataService()
+//          .sendCovidData(((CovidDataEntity) entity).getCountry(), (CovidDataEntityImpl) entity);
     }
 
     return null;

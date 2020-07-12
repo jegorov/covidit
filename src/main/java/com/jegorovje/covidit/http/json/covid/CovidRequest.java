@@ -3,7 +3,7 @@ package com.jegorovje.covidit.http.json.covid;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jegorovje.covidit.engine.context.CommandContext;
-import com.jegorovje.covidit.engine.data.entity.impl.CovidStatisticEntityImpl;
+import com.jegorovje.covidit.engine.data.entity.impl.CovidDataEntityImpl;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
@@ -20,11 +20,11 @@ public class CovidRequest {
     try {
       return CommandContext.getCommandContext().getEngineConfiguration()
           .getExecutorService().submit(() -> {
-            CovidStatisticEntityImpl covidStatisticEntity = CommandContext.getCommandContext()
-                .getEngineConfiguration().getCovidStatisticEntityManager()
+            CovidDataEntityImpl covidDataEntity = CommandContext.getCommandContext()
+                .getEngineConfiguration().getCovidDataEntityManager()
                 .findCovidStatisticByCountry(name);
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            return gson.toJson(covidStatisticEntity);
+            return gson.toJson(covidDataEntity);
           }).get();
 
     } catch (Exception e) {

@@ -1,6 +1,6 @@
 package com.jegorovje.covidit.engine.data.entity;
 
-public interface CovidStatisticEntity  {
+public interface CovidDataEntity {
 
   public String getCountry();
 

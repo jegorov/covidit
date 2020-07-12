@@ -1,7 +1,8 @@
 package com.jegorovje.covidit.engine;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import com.jegorovje.covidit.engine.manager.CovidStatisticEntityManager;
+import com.jegorovje.covidit.engine.manager.CovidDataEntityManager;
+import com.jegorovje.covidit.engine.transport.LiveCovidDataService;
 import io.micronaut.runtime.event.annotation.EventListener;
 import io.micronaut.runtime.server.event.ServerStartupEvent;
 import java.util.concurrent.ExecutorService;
@@ -19,7 +20,10 @@ import org.h2.tools.Server;
 public class EngineConfiguration {
 
   @Inject @Getter
-  CovidStatisticEntityManager covidStatisticEntityManager;
+  CovidDataEntityManager covidDataEntityManager;
+
+  @Inject @Getter
+  LiveCovidDataService liveCovidDataService;
 
   @Inject @Getter
   EntityManager entityManager;
@@ -27,7 +31,6 @@ public class EngineConfiguration {
   @Getter
   ExecutorService executorService;
 
-  //сделать нужно предконстракт, а это вот постконстракт
   @SneakyThrows
   @EventListener
   public void init(ServerStartupEvent event) {

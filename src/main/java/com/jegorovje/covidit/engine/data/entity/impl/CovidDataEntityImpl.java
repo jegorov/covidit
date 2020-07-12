@@ -1,7 +1,7 @@
 package com.jegorovje.covidit.engine.data.entity.impl;
 
 import com.jegorovje.covidit.engine.data.entity.AbstractEntity;
-import com.jegorovje.covidit.engine.data.entity.CovidStatisticEntity;
+import com.jegorovje.covidit.engine.data.entity.CovidDataEntity;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,8 +14,8 @@ import lombok.experimental.FieldDefaults;
 @Entity
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "covid_statistic")
-public class CovidStatisticEntityImpl extends AbstractEntity implements CovidStatisticEntity{
+@Table(name = "covid_data")
+public class CovidDataEntityImpl extends AbstractEntity implements CovidDataEntity {
 
   @Id
   UUID id;

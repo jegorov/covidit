@@ -1,15 +1,17 @@
 package com.jegorovje.covidit.engine.transport;
 
+import com.jegorovje.covidit.engine.data.entity.impl.CovidDataEntityImpl;
 import io.micronaut.configuration.kafka.annotation.KafkaClient;
 import io.micronaut.configuration.kafka.annotation.KafkaKey;
 import io.micronaut.configuration.kafka.annotation.Topic;
 
 @KafkaClient
-public class CovidDataClient {
+public interface LiveCovidDataService {
 
-  @Topic("my-products")
-  void sendProduct(@KafkaKey String brand, String name);
+  @Topic("live-covid-data-topic")
+  void sendCovidData(@KafkaKey String country, CovidDataEntityImpl covidDataEntity);
 
-  void sendProduct(@Topic String topic, @KafkaKey String brand, String name);
+  void sendCovidData(@Topic String topic, @KafkaKey String country,
+      CovidDataEntityImpl covidDataEntity);
 
 }
