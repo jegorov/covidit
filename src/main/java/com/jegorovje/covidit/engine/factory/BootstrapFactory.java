@@ -13,6 +13,7 @@ public class BootstrapFactory {
 
   @Context
   @Bean(preDestroy = "stop")
+  //todo вероятно чтобы работало необхоимо в пропертях объявить h2.console.enabled=true
   @Requires(property = "h2.console.enabled", value = "true")
   public Server h2WebServer() throws SQLException {
     return Server.createWebServer("-web", "-webAllowOthers", "-webPort", "8082").start();
