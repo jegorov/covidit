@@ -1,4 +1,4 @@
-package com.jegorovje.covidit.security.service;
+package com.jegorovje.covidit.engine.manager;
 
 import com.jegorovje.covidit.engine.context.CommandContext;
 import com.jegorovje.covidit.engine.data.entity.impl.UserEntity;
@@ -12,12 +12,12 @@ import javax.persistence.TypedQuery;
 
 @Singleton
 @TransactionalAdvice
-public class UserService {
+public class UserEntityManager {
 
   private final UserMapper userMapper;
   private final EntityManager entityManager;
 
-  public UserService(UserMapper userMapper) {
+  public UserEntityManager(UserMapper userMapper) {
     this.entityManager = CommandContext.getCommandContext().getEngineConfiguration()
         .getEntityManager();
     this.userMapper = userMapper;

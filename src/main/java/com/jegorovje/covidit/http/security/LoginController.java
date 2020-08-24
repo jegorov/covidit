@@ -1,7 +1,7 @@
 package com.jegorovje.covidit.http.security;
 
 import com.jegorovje.covidit.security.dto.UserDto;
-import com.jegorovje.covidit.security.service.UserService;
+import com.jegorovje.covidit.engine.manager.UserEntityManager;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Post;
@@ -17,14 +17,14 @@ import javax.naming.AuthenticationException;
 public class LoginController {
 
     @Inject
-    UserService userService;
+    UserEntityManager userEntityManager;
 
 
     @Post
     public String login(UserDto user) {
 
         Optional<UserDto> existingUser =
-            userService.findUser(user.getUsername());
+            userEntityManager.findUser(user.getUsername());
 
         if (existingUser.isEmpty()) {
             Single.error(new AuthenticationException("user doesn't exist"));

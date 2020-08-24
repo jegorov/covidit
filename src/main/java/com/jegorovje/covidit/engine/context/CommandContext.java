@@ -2,7 +2,6 @@ package com.jegorovje.covidit.engine.context;
 
 import com.jegorovje.covidit.engine.EngineConfiguration;
 import com.jegorovje.covidit.engine.context.cmd.Command;
-import com.jegorovje.covidit.engine.factory.SqlSessionFactory;
 import io.micronaut.runtime.event.annotation.EventListener;
 import io.micronaut.runtime.server.event.ServerStartupEvent;
 import io.micronaut.transaction.annotation.TransactionalAdvice;
@@ -12,6 +11,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.Getter;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,8 +27,8 @@ public class CommandContext {
   @Inject @Getter
   EngineConfiguration engineConfiguration;
 
-  @Inject @Getter
-  private SqlSessionFactory sessionFactory;
+  @Inject
+  private SessionFactory sessionFactory;
 
   public static CommandContext getCommandContext() {
     return stack.peek();
@@ -41,7 +41,7 @@ public class CommandContext {
 
   public <T> void execute(Command<T> command) {
     try {
-      Session session = sessionFactory.getSession();
+      Session session = sessionFactory.getCurrentSession();
       command.execute(this);
       session.flush();
     } catch (Exception e) {

@@ -4,7 +4,7 @@ import static io.micronaut.security.authentication.AuthenticationFailureReason.C
 import static io.micronaut.security.authentication.AuthenticationFailureReason.USER_NOT_FOUND;
 
 import com.jegorovje.covidit.security.dto.UserDto;
-import com.jegorovje.covidit.security.service.UserService;
+import com.jegorovje.covidit.engine.manager.UserEntityManager;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.security.authentication.AuthenticationFailed;
 import io.micronaut.security.authentication.AuthenticationProvider;
@@ -21,7 +21,7 @@ import org.reactivestreams.Publisher;
 @Singleton
 public class BasicAuthenticationProvider implements AuthenticationProvider {
 
-  @Inject UserService userService;
+  @Inject UserEntityManager userEntityManager;
 
   @Override
   public Publisher<AuthenticationResponse> authenticate(
@@ -31,7 +31,7 @@ public class BasicAuthenticationProvider implements AuthenticationProvider {
     final String password = authReq.getSecret().toString();
 
     Optional<UserDto> existingUser =
-        userService.findUser(username);
+        userEntityManager.findUser(username);
     return Flowable.just(
         existingUser.map(user -> {
           if (user.getPassword().equals(password)) {

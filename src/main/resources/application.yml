@@ -31,7 +31,7 @@ server:
       read-timeout: 120s
 h2:
   console:
-    enabled: false
+    enabled: true
 #kafka:
 #  bootstrap:
 #    servers: localhost:9092

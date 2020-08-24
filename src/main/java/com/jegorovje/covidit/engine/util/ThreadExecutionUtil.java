@@ -1,4 +1,4 @@
-package com.jegorovje.covidit.engine.factory;
+package com.jegorovje.covidit.engine.util;
 
 import com.jegorovje.covidit.engine.context.CommandContext;
 import javax.inject.Singleton;

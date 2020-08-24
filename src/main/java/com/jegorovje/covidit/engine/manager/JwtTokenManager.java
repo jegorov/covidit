@@ -1,4 +1,4 @@
-package com.jegorovje.covidit.security.service;
+package com.jegorovje.covidit.engine.manager;
 
 import com.jegorovje.covidit.engine.data.entity.impl.RefreshedTokenEntity;
 import io.micronaut.runtime.event.annotation.EventListener;
@@ -15,12 +15,12 @@ import org.reactivestreams.Publisher;
 
 @Singleton
 @TransactionalAdvice
-public class JwtTokenService implements RefreshTokenPersistence {
+public class JwtTokenManager implements RefreshTokenPersistence {
 
-  private final UserService userService;
+  private final UserEntityManager userEntityManager;
 
-  public JwtTokenService(UserService userService) {
-    this.userService = userService;
+  public JwtTokenManager(UserEntityManager userEntityManager) {
+    this.userEntityManager = userEntityManager;
   }
 
   @Override
@@ -30,7 +30,7 @@ public class JwtTokenService implements RefreshTokenPersistence {
         event.getRefreshToken() != null &&
         event.getUserDetails() != null &&
         event.getUserDetails().getUsername() != null) {
-      userService.saveRefreshToken(event.getUserDetails().getUsername(), event.getRefreshToken());
+      userEntityManager.saveRefreshToken(event.getUserDetails().getUsername(), event.getRefreshToken());
 //      String payload = event.getRefreshToken();
 //      refreshTokenRepository.save(event.getUserDetails() .getUsername(), payload, Boolean.FALSE)
     }

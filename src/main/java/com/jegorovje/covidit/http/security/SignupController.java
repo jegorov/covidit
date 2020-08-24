@@ -1,7 +1,7 @@
 package com.jegorovje.covidit.http.security;
 
 import com.jegorovje.covidit.security.dto.UserDto;
-import com.jegorovje.covidit.security.service.UserService;
+import com.jegorovje.covidit.engine.manager.UserEntityManager;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Post;
@@ -17,16 +17,16 @@ import javax.naming.AuthenticationException;
 public class SignupController {
 
   @Inject
-  UserService userService;
+  UserEntityManager userEntityManager;
 
   @Post("/signup")
   public Single<HttpResponse> register(UserDto userDto) {
     userDto.setRole("VIEW");
     Optional<UserDto> existingUser =
-        userService.findUser(userDto.getUsername());
+        userEntityManager.findUser(userDto.getUsername());
     if (existingUser.isPresent()) {
       return Single.error(new AuthenticationException("user already exists"));
     }
-    return Single.just(HttpResponse.ok(userService.createUser(userDto)));
+    return Single.just(HttpResponse.ok(userEntityManager.createUser(userDto)));
   }
 }
