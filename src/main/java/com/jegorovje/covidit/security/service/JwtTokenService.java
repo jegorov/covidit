@@ -1,7 +1,6 @@
 package com.jegorovje.covidit.security.service;
 
-import com.jegorovje.covidit.security.data.entity.RefreshedTokenEntity;
-import com.jegorovje.covidit.security.repository.RefreshTokenRepository;
+import com.jegorovje.covidit.engine.data.entity.impl.RefreshedTokenEntity;
 import io.micronaut.runtime.event.annotation.EventListener;
 import io.micronaut.security.authentication.UserDetails;
 import io.micronaut.security.token.event.RefreshTokenGeneratedEvent;
@@ -18,11 +17,9 @@ import org.reactivestreams.Publisher;
 @TransactionalAdvice
 public class JwtTokenService implements RefreshTokenPersistence {
 
-  private final RefreshTokenRepository refreshTokenRepository;
   private final UserService userService;
 
-  public JwtTokenService(RefreshTokenRepository refreshTokenRepository, UserService userService) {
-    this.refreshTokenRepository = refreshTokenRepository;
+  public JwtTokenService(UserService userService) {
     this.userService = userService;
   }
 
@@ -42,14 +39,15 @@ public class JwtTokenService implements RefreshTokenPersistence {
   @Override
   public Publisher<UserDetails> getUserDetails(String refreshToken) {
     return Flowable.create(emitter -> {
-      Optional<RefreshedTokenEntity> tokenOpt = refreshTokenRepository
-          .findByRefreshToken(refreshToken);
+      Optional<RefreshedTokenEntity> tokenOpt = null;
+//          refreshTokenRepository
+//          .findByRefreshToken(refreshToken);
       if (tokenOpt.isPresent()) {
         RefreshedTokenEntity token = tokenOpt.get();
         if (token.getRevoked()) {
           emitter.onError(new RuntimeException());
         } else {
-          emitter.onNext(new UserDetails(token.getUserId(), new ArrayList<>()));
+          emitter.onNext(new UserDetails(token.getUsername(), new ArrayList<>()));
           emitter.onComplete();
         }
       } else {

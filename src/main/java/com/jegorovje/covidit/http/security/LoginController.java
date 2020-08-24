@@ -1,18 +1,12 @@
 package com.jegorovje.covidit.http.security;
 
-import com.jegorovje.covidit.security.auth.BasicAuthenticationProvider;
-import com.jegorovje.covidit.security.data.UserDto;
+import com.jegorovje.covidit.security.dto.UserDto;
 import com.jegorovje.covidit.security.service.UserService;
-import io.micronaut.http.HttpRequest;
-import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Post;
-import io.micronaut.http.client.RxHttpClient;
 import io.micronaut.security.annotation.Secured;
-import io.micronaut.security.authentication.UsernamePasswordCredentials;
 import io.micronaut.security.rules.SecurityRule;
-import io.micronaut.security.token.jwt.render.BearerAccessRefreshToken;
 import io.reactivex.Single;
 import java.util.Optional;
 import javax.inject.Inject;
@@ -30,7 +24,7 @@ public class LoginController {
     public String login(UserDto user) {
 
         Optional<UserDto> existingUser =
-            userService.findUser(user.getLogin());
+            userService.findUser(user.getUsername());
 
         if (existingUser.isEmpty()) {
             Single.error(new AuthenticationException("user doesn't exist"));

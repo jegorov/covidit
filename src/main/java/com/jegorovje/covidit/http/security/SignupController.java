@@ -1,6 +1,6 @@
 package com.jegorovje.covidit.http.security;
 
-import com.jegorovje.covidit.security.data.UserDto;
+import com.jegorovje.covidit.security.dto.UserDto;
 import com.jegorovje.covidit.security.service.UserService;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.Controller;
@@ -16,17 +16,17 @@ import javax.naming.AuthenticationException;
 @Secured(SecurityRule.IS_ANONYMOUS)
 public class SignupController {
 
-    @Inject
-    UserService userService;
+  @Inject
+  UserService userService;
 
-    @Post("/signup")
-    public Single<HttpResponse> register(UserDto userDto) {
-        userDto.setRole("VIEW");
-        Optional<UserDto> existingUser =
-            userService.findUser(userDto.getLogin());
-        if (existingUser.isPresent()) {
-            return Single.error(new AuthenticationException("user already exists"));
-        }
-        return Single.just(HttpResponse.ok(userService.createUser(userDto)));
+  @Post("/signup")
+  public Single<HttpResponse> register(UserDto userDto) {
+    userDto.setRole("VIEW");
+    Optional<UserDto> existingUser =
+        userService.findUser(userDto.getUsername());
+    if (existingUser.isPresent()) {
+      return Single.error(new AuthenticationException("user already exists"));
     }
+    return Single.just(HttpResponse.ok(userService.createUser(userDto)));
+  }
 }

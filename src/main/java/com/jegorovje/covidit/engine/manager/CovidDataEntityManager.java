@@ -1,8 +1,8 @@
 package com.jegorovje.covidit.engine.manager;
 
 import com.jegorovje.covidit.engine.context.CommandContext;
-import com.jegorovje.covidit.engine.data.entity.AbstractEntity;
-import com.jegorovje.covidit.engine.data.entity.impl.CovidDataEntityImpl;
+import com.jegorovje.covidit.engine.data.entity.Entity;
+import com.jegorovje.covidit.engine.data.entity.impl.CovidDataEntity;
 import io.micronaut.transaction.annotation.ReadOnly;
 import java.util.Map;
 import java.util.UUID;
@@ -13,26 +13,26 @@ import lombok.SneakyThrows;
 
 
 @Singleton
-public abstract class CovidDataEntityManager extends AbstractEntityManager {
+public class CovidDataEntityManager extends AbstractEntityManager {
 
 
-  public AbstractEntity create() {
-    return new CovidDataEntityImpl();
+  public Entity create() {
+    return new CovidDataEntity();
   }
 
   @ReadOnly
-  public CovidDataEntityImpl findCovidStatisticByCountry(@NotNull String country) {
+  public CovidDataEntity findCovidStatisticByCountry(@NotNull String country) {
     String qlString = "from CovidDataEntityImpl as a where LOWER(country) LIKE LOWER(:country)";
-    TypedQuery<CovidDataEntityImpl> query = CommandContext.getCommandContext()
+    TypedQuery<CovidDataEntity> query = CommandContext.getCommandContext()
         .getEngineConfiguration()
-        .getEntityManager().createQuery(qlString, CovidDataEntityImpl.class);
+        .getEntityManager().createQuery(qlString, CovidDataEntity.class);
     query.setParameter("country", country);
 
     return query.getSingleResult();
   }
 
-  public CovidDataEntityImpl createCovidStatisticFromMap(Map<String, String> map) {
-    CovidDataEntityImpl entity = (CovidDataEntityImpl) create();
+  public CovidDataEntity createCovidStatisticFromMap(Map<String, String> map) {
+    CovidDataEntity entity = (CovidDataEntity) create();
     entity.setActiveCases(parseToString(map.get("activeCases")));
     entity.setTotalCases(parseToString(map.get("totalCases")));
     entity.setTotalDeath(parseToString(map.get("totalDeath")));

@@ -3,7 +3,7 @@ package com.jegorovje.covidit.security.auth;
 import static io.micronaut.security.authentication.AuthenticationFailureReason.CREDENTIALS_DO_NOT_MATCH;
 import static io.micronaut.security.authentication.AuthenticationFailureReason.USER_NOT_FOUND;
 
-import com.jegorovje.covidit.security.data.UserDto;
+import com.jegorovje.covidit.security.dto.UserDto;
 import com.jegorovje.covidit.security.service.UserService;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.security.authentication.AuthenticationFailed;
@@ -27,15 +27,15 @@ public class BasicAuthenticationProvider implements AuthenticationProvider {
   public Publisher<AuthenticationResponse> authenticate(
       HttpRequest httpReq, AuthenticationRequest authReq) {
 
-    final String login = authReq.getIdentity().toString();
+    final String username = authReq.getIdentity().toString();
     final String password = authReq.getSecret().toString();
 
     Optional<UserDto> existingUser =
-        userService.findUser(login);
-   return Flowable.just(
+        userService.findUser(username);
+    return Flowable.just(
         existingUser.map(user -> {
           if (user.getPassword().equals(password)) {
-            return new UserDetails(login,
+            return new UserDetails(username,
                 Arrays.asList(user.getRole()));
           }
           return new

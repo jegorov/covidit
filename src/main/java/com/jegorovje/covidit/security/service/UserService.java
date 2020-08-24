@@ -1,8 +1,8 @@
 package com.jegorovje.covidit.security.service;
 
 import com.jegorovje.covidit.engine.context.CommandContext;
-import com.jegorovje.covidit.security.data.UserDto;
-import com.jegorovje.covidit.security.data.entity.UserEntity;
+import com.jegorovje.covidit.engine.data.entity.impl.UserEntity;
+import com.jegorovje.covidit.security.dto.UserDto;
 import com.jegorovje.covidit.security.mapper.UserMapper;
 import io.micronaut.transaction.annotation.TransactionalAdvice;
 import java.util.Optional;
@@ -30,10 +30,10 @@ public class UserService {
     return user;
   }
 
-  public Optional<UserDto> findUser(String login) {
-    String qlString = "from UserEntity where LOWER(login) LIKE LOWER(:login)";
+  public Optional<UserDto> findUser(String username) {
+    String qlString = "from UserEntity where LOWER(username) LIKE LOWER(:username)";
     TypedQuery<UserEntity> query = entityManager.createQuery(qlString, UserEntity.class);
-    query.setParameter("login", login);
+    query.setParameter("username", username);
     return query.getResultList().stream().findFirst().map(userMapper::toDto);
   }
 
@@ -44,14 +44,14 @@ public class UserService {
     return query.getResultList().stream().findFirst().map(userMapper::toDto);
   }
 
-  public void saveRefreshToken(String userId, String refreshToken) {
-    String qlString = "from UserEntity where LOWER(login) LIKE LOWER(:login)";
+  public void saveRefreshToken(String username, String refreshToken) {
+    String qlString = "from UserEntity where LOWER(username) LIKE LOWER(:username)";
     TypedQuery<UserEntity> query = entityManager.createQuery(qlString, UserEntity.class);
-    query.setParameter("login", userId);
+    query.setParameter("username", username);
     UserEntity userEntity = query.getSingleResult();
     if (query.getSingleResult() != null) {
       userEntity.setToken(refreshToken);
-      entityManager.merge(userEntity);
+      entityManager.refresh(userEntity);
     }
   }
 }

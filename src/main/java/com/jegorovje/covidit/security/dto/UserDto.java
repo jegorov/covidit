@@ -1,4 +1,4 @@
-package com.jegorovje.covidit.security.data;
+package com.jegorovje.covidit.security.dto;
 
 import javax.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class UserDto {
 
     @NotBlank
-    private String login;
+    private String username;
     @NotBlank
     private String password;
 

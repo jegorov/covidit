@@ -28,7 +28,7 @@ public class InsertAllCovidStatisticToDatabaseCmd implements Command<Void> {
       Entity entity = CommandContext.getCommandContext().getEngineConfiguration()
           .getCovidDataEntityManager()
           .createCovidStatisticFromMap(map);
-      commandContext.getEngineConfiguration().getCovidDataEntityManager().merge(entity);
+      commandContext.getEngineConfiguration().getEntityManager().merge(entity);
       //todo кафку тут пока нет смысла использовать
 //      commandContext.getEngineConfiguration().getLiveCovidDataService()
 //          .sendCovidData(((CovidDataEntity) entity).getCountry(), (CovidDataEntityImpl) entity);
