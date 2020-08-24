@@ -2,40 +2,34 @@ package com.jegorovje.covidit.security.data.entity;
 
 import io.micronaut.data.annotation.DateCreated;
 import io.micronaut.data.annotation.GeneratedValue;
-import io.micronaut.data.annotation.Id;
-import io.micronaut.data.annotation.MappedEntity;
 import java.time.Instant;
+import java.util.UUID;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
-@MappedEntity
+@Entity
 @Data
 @NoArgsConstructor
 @Table(name = "token")
 public class RefreshedTokenEntity {
 
-  @Id
-  @GeneratedValue
-  @NonNull
-  Long id;
+  @Id @GeneratedValue
+  UUID id;
 
-  @NonNull
-  @NotBlank
+  @NonNull @NotBlank
   String userId;
 
-  @NonNull
-  @NotBlank
+  @NonNull @NotBlank
   String refreshToken;
 
   @NonNull
-
   Boolean revoked;
 
-  @DateCreated
-  @NonNull
-
+  @DateCreated @NonNull
   Instant dateCreated;
 }

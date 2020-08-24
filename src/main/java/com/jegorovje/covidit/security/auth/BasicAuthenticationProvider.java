@@ -21,28 +21,27 @@ import org.reactivestreams.Publisher;
 @Singleton
 public class BasicAuthenticationProvider implements AuthenticationProvider {
 
-    @Inject UserService userService;
+  @Inject UserService userService;
 
-    @Override
-    public Publisher<AuthenticationResponse> authenticate(
-        HttpRequest httpReq, AuthenticationRequest authReq) {
+  @Override
+  public Publisher<AuthenticationResponse> authenticate(
+      HttpRequest httpReq, AuthenticationRequest authReq) {
 
-        final String login = authReq.getIdentity().toString();
-        final String password = authReq.getSecret().toString();
+    final String login = authReq.getIdentity().toString();
+    final String password = authReq.getSecret().toString();
 
-        Optional<UserDto> existingUser =
-            userService.findUser(login);
-
-        return Flowable.just(
-            existingUser.map(user -> {
-                if (user.getPassword().equals(password)) {
-                    return new UserDetails(login,
-                        Arrays.asList(user.getRole()));
-                }
-                return new
-                    AuthenticationFailed(CREDENTIALS_DO_NOT_MATCH);
-            })
-                .orElse(new AuthenticationFailed(USER_NOT_FOUND))
-        );
-    }
+    Optional<UserDto> existingUser =
+        userService.findUser(login);
+   return Flowable.just(
+        existingUser.map(user -> {
+          if (user.getPassword().equals(password)) {
+            return new UserDetails(login,
+                Arrays.asList(user.getRole()));
+          }
+          return new
+              AuthenticationFailed(CREDENTIALS_DO_NOT_MATCH);
+        })
+            .orElse(new AuthenticationFailed(USER_NOT_FOUND))
+    );
+  }
 }

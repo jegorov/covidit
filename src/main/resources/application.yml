@@ -45,13 +45,15 @@ micronaut:
       propagation:
         enabled: true
       jwt:
-        signatures:
-          secret:
-            generator:
-              secret: "F7NVV7PnEiFm765hVzJSuasmomVWK0c-gB9ddH8T_5RLWTVjpDs-nGMX8sOf0wzHqPBnKy7mwj9hoQdUXt5OdE3d_6QsG5X9UFnQjBNALryKCaeqB0EPsveOhMNF06WlNKjhexns6fHbUwkLKbE6UCLPLlgoxavRFP79I9LkPM0"
         bearer:
           enabled: true
         enabled: true
+        generator:
+          refresh-token:
+            secret: "F7NVV7PnEiFm765hVzJSuasmomVWK0c-gB9ddH8T_5RLWTVjpDs-nGMX8sOf0wzHqPBnKy7mwj9hoQdUXt5OdE3d_6QsG5X9UFnQjBNALryKCaeqB0EPsveOhMNF06WlNKjhexns6fHbUwkLKbE6UCLPLlgoxavRFP79I9LkPM0"
+            enabled: true
+          access-token:
+            expiration: 36000
       writer:
         header:
           enabled: true
@@ -60,7 +62,7 @@ micronaut:
         enabled: true
       login:
         enabled: true
-        path: "/login/token"
+        path: "/login/token/get"
 #  session:
 #    http:
 #      redis:

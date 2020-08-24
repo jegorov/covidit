@@ -14,6 +14,7 @@
     </root>
 
     <logger name="com.jegorovje.covidit" level="WARN"/>
+    <logger name="io.micronaut.security" level="INFO"/>
     <logger name="org.hibernate.SQL" level="ERROR" />
     <logger name="org.hibernate.type" level="ERROR" />
 
