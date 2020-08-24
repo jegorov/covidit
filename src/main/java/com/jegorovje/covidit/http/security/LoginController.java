@@ -1,6 +1,6 @@
 package com.jegorovje.covidit.http.security;
 
-import com.jegorovje.covidit.security.dto.UserDto;
+import com.jegorovje.covidit.engine.security.dto.UserDto;
 import com.jegorovje.covidit.engine.manager.UserEntityManager;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;

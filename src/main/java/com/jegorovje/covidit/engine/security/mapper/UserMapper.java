@@ -1,7 +1,7 @@
-package com.jegorovje.covidit.security.mapper;
+package com.jegorovje.covidit.engine.security.mapper;
 
 import com.jegorovje.covidit.engine.data.entity.impl.UserEntity;
-import com.jegorovje.covidit.security.dto.UserDto;
+import com.jegorovje.covidit.engine.security.dto.UserDto;
 import javax.inject.Singleton;
 
 @Singleton

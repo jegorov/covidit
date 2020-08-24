@@ -14,7 +14,7 @@ jpa:
           auto: update
         show_sql: false
         allow_update_outside_transaction: false
-    packages-to-scan: 'com.jegorovje.covidit.engine.data.entity.impl,com.jegorovje.covidit.security.data.entity'
+    packages-to-scan: 'com.jegorovje.covidit.engine.data.entity.impl,com.jegorovje.covidit.engine.security.data.entity'
 server:
   cors:
     enabled: true

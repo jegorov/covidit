@@ -2,8 +2,8 @@ package com.jegorovje.covidit.engine.manager;
 
 import com.jegorovje.covidit.engine.context.CommandContext;
 import com.jegorovje.covidit.engine.data.entity.impl.UserEntity;
-import com.jegorovje.covidit.security.dto.UserDto;
-import com.jegorovje.covidit.security.mapper.UserMapper;
+import com.jegorovje.covidit.engine.security.dto.UserDto;
+import com.jegorovje.covidit.engine.security.mapper.UserMapper;
 import io.micronaut.transaction.annotation.TransactionalAdvice;
 import java.util.Optional;
 import javax.inject.Singleton;

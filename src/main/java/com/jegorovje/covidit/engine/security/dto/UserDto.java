@@ -1,4 +1,4 @@
-package com.jegorovje.covidit.security.dto;
+package com.jegorovje.covidit.engine.security.dto;
 
 import javax.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

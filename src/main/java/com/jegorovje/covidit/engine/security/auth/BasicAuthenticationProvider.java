@@ -1,9 +1,9 @@
-package com.jegorovje.covidit.security.auth;
+package com.jegorovje.covidit.engine.security.auth;
 
 import static io.micronaut.security.authentication.AuthenticationFailureReason.CREDENTIALS_DO_NOT_MATCH;
 import static io.micronaut.security.authentication.AuthenticationFailureReason.USER_NOT_FOUND;
 
-import com.jegorovje.covidit.security.dto.UserDto;
+import com.jegorovje.covidit.engine.security.dto.UserDto;
 import com.jegorovje.covidit.engine.manager.UserEntityManager;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.security.authentication.AuthenticationFailed;
