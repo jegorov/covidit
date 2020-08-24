@@ -54,7 +54,6 @@ micronaut:
             enabled: true
           access-token:
             expiration: 36000
-
       writer:
         header:
           enabled: true
