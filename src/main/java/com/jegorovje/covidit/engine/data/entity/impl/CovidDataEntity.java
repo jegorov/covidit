@@ -24,7 +24,7 @@ public class CovidDataEntity extends Entity {
 
   String sharp;
 
-  String totalCases;
+  Integer totalCases;
 
   String totalDeath;
 

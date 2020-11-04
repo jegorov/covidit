@@ -10,10 +10,10 @@ import io.micronaut.http.annotation.Get;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Controller("/covid")
-public class CovidRequest {
+@Controller("/json/covid")
+public class CovidController {
 
-  private static final Logger log = LoggerFactory.getLogger(CovidRequest.class);
+  private static final Logger log = LoggerFactory.getLogger(CovidController.class);
 
   @Get(value = "/country/{name}", produces = MediaType.APPLICATION_JSON)
   public String stocks(String name) {

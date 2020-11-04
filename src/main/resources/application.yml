@@ -14,7 +14,6 @@ jpa:
           auto: update
         show_sql: false
         allow_update_outside_transaction: false
-    packages-to-scan: 'com.jegorovje.covidit.engine.data.entity.impl,com.jegorovje.covidit.engine.security.data.entity'
 server:
   cors:
     enabled: true
@@ -36,42 +35,11 @@ h2:
 #  bootstrap:
 #    servers: localhost:9092
 micronaut:
+  server:
+    cors:
+      single-header: true
+      enabled: true
   executors:
     scheduled:
       type: scheduled
       core-pool-size: 3
-  security:
-    token:
-      propagation:
-        enabled: true
-      jwt:
-        bearer:
-          enabled: true
-        enabled: true
-        generator:
-          refresh-token:
-            secret: "F7NVV7PnEiFm765hVzJSuasmomVWK0c-gB9ddH8T_5RLWTVjpDs-nGMX8sOf0wzHqPBnKy7mwj9hoQdUXt5OdE3d_6QsG5X9UFnQjBNALryKCaeqB0EPsveOhMNF06WlNKjhexns6fHbUwkLKbE6UCLPLlgoxavRFP79I9LkPM0"
-            enabled: true
-          access-token:
-            expiration: 36000
-      writer:
-        header:
-          enabled: true
-    endpoints:
-      oauth:
-        enabled: true
-      login:
-        enabled: true
-        path: "/login/token/get"
-#  session:
-#    http:
-#      redis:
-#        enabled: true
-#         The Redis namespace to write sessions to
-#        namespace: 'myapp:sessions'
-#         Write session changes in the background
-#        write-mode: BACKGROUND
-#         Disable programatic activation of keyspace events
-#        enable-keyspace-events: false
-#redis:
-#  uri: redis://localhost
