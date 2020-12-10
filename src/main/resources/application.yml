@@ -1,0 +1,45 @@
+datasources:
+  default:
+    url: jdbc:h2:mem:devDb
+    driverClassName: org.h2.Driver
+    username: sa
+    password: ''
+    schema-generate: CREATE_DROP
+    dialect: H2
+jpa:
+  default:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        show_sql: false
+        allow_update_outside_transaction: false
+server:
+  cors:
+    enabled: true
+  maxRequestSize: 1000MB
+  max-request-size: 1000MB
+  multipart:
+    max-file-size: 100MB
+    max-request-size: 100MB
+    maxFileSize: 100MB
+    maxRequestSize: 100MB
+    enabled: true
+  http:
+    client:
+      read-timeout: 120s
+h2:
+  console:
+    enabled: true
+#kafka:
+#  bootstrap:
+#    servers: localhost:9092
+micronaut:
+  server:
+    cors:
+      single-header: true
+      enabled: true
+  executors:
+    scheduled:
+      type: scheduled
+      core-pool-size: 3
